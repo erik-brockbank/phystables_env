@@ -2,10 +2,16 @@
  * Startup library for URL processing, loading in html content, and initializing Experiment class
  */
 
- $(window).ready(function() {
-    // parse URL for shortcuts and testing
-    // Ex. http://localhost:1337/exp.html?&mode=test --> `test` mode will write a results json file with TEST_...
-    //     http://localhost:1337/exp.html?&mode=short --> `short` mode will only proceed through instructions and two trials and will not write a results json file
+$(window).ready(function() {
+    $("#consent").show();
+});
+
+clickConsent = function() {
+    /* parse URL for shortcuts and testing
+        Ex. http://localhost:1337/exp.html?&mode=test --> `test` mode will write a results json file with TEST_...
+        http://localhost:1337/exp.html?&mode=short --> `short` mode will only proceed through instructions and two trials and
+                                                        will not write a results json file
+    */
     var istest = false;
     var isshort = false;
     var urlParams = new URLSearchParams(window.location.href);
@@ -35,4 +41,4 @@
 
         exp.runInstructions();
     });
-});
+}
