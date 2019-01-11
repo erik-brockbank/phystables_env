@@ -1,0 +1,74 @@
+body {
+  padding:0px;
+  margin: 0px;
+  background-color: white;
+  color: black;
+  font-weight: 300;
+  font-size: 13pt;
+}
+
+canvas {
+  border: 1px solid black;
+}
+
+span {
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
+
+.field {
+  border: 1px solid black;
+  width: 1000px;
+  height: 620px;
+  line-height: 620px;
+  text-align: center;
+  vertical-align: central;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 40px;
+  color: black;
+  align-self: center;
+  margin: auto;
+  vertical-align: middle;
+}
+
+#filler {
+  border: none;
+}
+
+#interactors {
+  height: 40px;
+  width: 1000px;
+  align-self: center;
+  margin: auto;
+  margin-top: 2px;
+}
+
+#lbutton #rbutton {
+  align-self: center;
+}
+
+#outercontainer {
+  display: inline-block;
+  vertical-align: middle;
+  align-self: center;
+  width: 100%;
+  padding: 4px;
+}
+
+#score {
+  border: none;
+  align-self: center;
+}
+
+#table {
+  height: 620;
+  width: 1000;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#trialcounter {
+  border: none;
+}
