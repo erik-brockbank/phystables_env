@@ -32,6 +32,12 @@ span {
   vertical-align: middle;
 }
 
+#consent {
+  padding-left: 100px;
+  padding-right: 100px;
+  padding-bottom: 100px;
+}
+
 #filler {
   border: none;
 }
