@@ -232,12 +232,8 @@ Experiment.prototype.endExp = function(me) {
     };
 
     console.log("Data collected: \n", data);
-    if (me.isshort) {
-        console.log("In `short` mode so NOT writing data to server.");
-    } else {
-        console.log("Writing data to server.");
-        me.logToServer(data);
-    }
+    console.log("Writing data to server.");
+    me.logToServer(data);
 };
 
 Experiment.prototype.logToServer = function(data) {

@@ -19,7 +19,10 @@ clickConsent = function() {
     if (urlParams.has("mode")) {
         var mode = urlParams.get("mode");
         if (mode == "test") istest = true;
-        else if (mode == "short") isshort = true;
+        if (mode == "short") {
+            isshort = true;
+            istest = true;
+        }
     }
     $("body").load("canvas.html", function() {
         $(".field").hide(0);

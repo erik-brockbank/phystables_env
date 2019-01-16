@@ -392,7 +392,8 @@ Trial.prototype.showtrial = function(dt, displaytime, responsetime, maxtime, cal
             g = that.tb.walls[i];
             var closestdist = cleverdist(that.ballwaitpos.x, that.ballwaitpos.y,
                                             g.left, g.top, g.right, g.bottom);
-            that.walldistances.push({"wall": g, "walldist": closestdist});
+            wallcoords = {"top": g.top, "left": g.left, "bottom": g.bottom, "right": g.right};
+            that.walldistances.push({"wall": wallcoords, "walldist": closestdist});
         }
 
         that.keyhandler.setpress(function(k) {
