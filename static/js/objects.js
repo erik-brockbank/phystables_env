@@ -90,7 +90,7 @@ Ball.prototype.clone = function(newspace) {
  *                     (e.g., walls, occluders, goals)
  * @returns {bool} if there's an intersection
  */
-Ball.prototype.intersectRect= function(rect) {
+Ball.prototype.intersectRect = function(rect) {
     var pos = this.getpos();
     var r = this.rad;
     var top = pos.y - r;
@@ -310,6 +310,28 @@ Table.prototype.checkend = function() {
    return 0;
 };
 
+Table.prototype.countbounces = function() {
+    var pos = this.ball.getpos();
+    var r = this.ball.rad;
+    var top = pos.y - r;
+    var bottom = pos.y + r;
+    var right = pos.x + r;
+    var left = pos.x - r;
+
+    for (j = 0; j < this.walls.length; j++) {
+        wall = this.walls[j];
+        if (this.ball.intersectRect(wall)) this.bounces++;
+    }
+    // left wall
+    if (left <= 0) this.bounces++;
+    // right wall
+    if (right >= this.dims.x) this.bounces++;
+    // top wall
+    if (top <= 0) this.bounces++;
+    // bottom wall
+    if (bottom >= this.dims.y) this.bounces++;
+};
+
 Table.prototype.step = function(t, maxtime) {
     var nsteps = t / this.tres;
     if (nsteps % 1 !== 0) console.log("Steps not evenly divisible... may be off");
@@ -318,6 +340,7 @@ Table.prototype.step = function(t, maxtime) {
         this.onstep();
         this.space.step(this.tres);
         this.time += this.tres;
+        this.countbounces();
         e = this.checkend();
         if (e !== 0) return e;
         if (maxtime && this.time > maxtime) return TIMEUP;

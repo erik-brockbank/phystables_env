@@ -7,6 +7,7 @@ $(window).ready(function() {
 });
 
 clickConsent = function() {
+    $("#consent").show();
     /* parse URL for shortcuts and testing
         Ex. http://localhost:1337/exp.html?&mode=test --> `test` mode will write a results json file with TEST_...
         http://localhost:1337/exp.html?&mode=short --> `short` mode will only proceed through instructions and two trials and

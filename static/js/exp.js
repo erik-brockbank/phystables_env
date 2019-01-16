@@ -189,8 +189,10 @@ Experiment.prototype.recordTrial = function(me) {
     var trialData = {
         "logts": ts, // timestamp for this trial completion
         "trialname": trname, // name of the file used for this trial
-        "trialstructure": trstruct, // location of all elements in the trial so we could re-construct it as needed
         "trialindex": me.trial.trcounter.count, // ordinality for this trial completion
+        "trialstructure": trstruct, // location of all elements in the trial so we could re-construct it as needed
+        "numwalls": trstruct.Walls.length, // number of walls and obstacles in this trial
+        "numbounces": me.trial.bounces, // number of times the ball bounced off a wall or obstacle
         "trialtarget": realgoal, // true target the ball hit first on this trial ('red' or 'green')
         "targetswitched": goalsw, // whether the target color was switched at trial display time
         "usertarget": resp, // which target the user selected in this trial ('red', 'green', or 'no response')

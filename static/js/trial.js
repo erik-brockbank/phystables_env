@@ -184,6 +184,7 @@ Trial.prototype.loadFromTList = function(trname, trlist) {
     this.tb = trlist.loadTrial(trname, this.tbele);
     this.done = false;
     this.realgoal = this.gettrialgoal(DT);
+    this.bounces = this.gettrialbounces(DT);
     this.response = NORESPONSE;
     this.resptime = -1;
 };
@@ -218,6 +219,16 @@ Trial.prototype.gettrialgoal = function(dt) {
     while (e === 0)
         e = tableclone.step(dt);
     return e;
+};
+
+Trial.prototype.gettrialbounces = function(dt) {
+    // BEWARE this function can fail to terminate which quietly hangs the browser
+    var tableclone = this.tb.clone();
+    tableclone.bounces = 0;
+    var e = 0;
+    while (e === 0)
+        e = tableclone.step(dt);
+    return tableclone.bounces;
 };
 
 Trial.prototype.displaytext = function(text, textcol = "black", bkcol = "white", hideall = true) {
