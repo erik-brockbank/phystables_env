@@ -177,7 +177,6 @@ Trial = function(table, leftbtn, rightbtn, score, trcounter, redonleft) {
         function(k) {},
         function(k) {}
     );
-
 };
 
 Trial.prototype.loadFromTList = function(trname, trlist) {
@@ -376,6 +375,26 @@ Trial.prototype.showtrial = function(dt, displaytime, responsetime, maxtime, cal
 
         var timeoutid;
         var start = new Date();
+        // Collect relevant data about state while ball is paused
+        that.ballwaitpos = Object.assign({}, that.tb.ball.getpos());
+        that.goaldistances = [];
+        that.walldistances = [];
+        for (i = 0; i < that.tb.goals.length; i++) {
+            g = that.tb.goals[i];
+            var closestdist = cleverdist(that.ballwaitpos.x, that.ballwaitpos.y,
+                                            g.left, g.top, g.right, g.bottom);
+            var goalname;
+            if (g.onret == REDGOAL) goalname = "red";
+            else goalname = "green";
+            that.goaldistances.push({"name": goalname, "goal": g, "goaldist": closestdist});
+        }
+        for (i = 0; i < that.tb.walls.length; i++) {
+            g = that.tb.walls[i];
+            var closestdist = cleverdist(that.ballwaitpos.x, that.ballwaitpos.y,
+                                            g.left, g.top, g.right, g.bottom);
+            that.walldistances.push({"wall": g, "walldist": closestdist});
+        }
+
         that.keyhandler.setpress(function(k) {
             if (k === KEYMAP_INV["r"]) {
                 that.keyhandler.setpress(function(k) {});
@@ -444,6 +463,7 @@ Trial.prototype.runtrial = function(dt, displaytime, responsetime, maxtime, call
     } else this.goalswitched = false;
 
     var that = this;
+    that.ballstartpos = Object.assign({}, that.tb.ball.getpos());
     var runfn = function() {that.showtrial(dt, displaytime, responsetime, maxtime, callback, showscore);};
     this.showinstruct("Press the spacebar to begin", runfn, "black", "lightgrey");
 };

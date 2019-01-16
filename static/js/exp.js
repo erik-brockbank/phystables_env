@@ -191,8 +191,12 @@ Experiment.prototype.recordTrial = function(me) {
         "trialname": trname, // name of the file used for this trial
         "trialindex": me.trial.trcounter.count, // ordinality for this trial completion
         "trialstructure": trstruct, // location of all elements in the trial so we could re-construct it as needed
+        "goaldistances": me.trial.goaldistances, // closest line to each of the goals from the ball's waiting position
         "numwalls": trstruct.Walls.length, // number of walls and obstacles in this trial
+        "walldistances": me.trial.walldistances, // closest line to each of the walls from the ball's waiting position
         "numbounces": me.trial.bounces, // number of times the ball bounced off a wall or obstacle
+        "ballstartpos": me.trial.ballstartpos, // Starting position of the ball
+        "ballwaitpos": me.trial.ballwaitpos, // Position of the ball when participants guess a target
         "trialtarget": realgoal, // true target the ball hit first on this trial ('red' or 'green')
         "targetswitched": goalsw, // whether the target color was switched at trial display time
         "usertarget": resp, // which target the user selected in this trial ('red', 'green', or 'no response')

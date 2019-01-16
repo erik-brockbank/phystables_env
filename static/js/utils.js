@@ -54,17 +54,41 @@ function shuffle(array) {
  * @param {num} r: radius of separation
  * @returns {bool}: true if points 1 and 2 are within r px of each other
  */
- function edistwithin(x1,y1,x2,y2,r) {
-    var dx2 = (x1-x2)*(x1-x2);
-    var dy2 = (y1-y2)*(y1-y2);
-    return dx2 + dy2 < r*r;
+ function edistwithin(x1, y1, x2, y2, r) {
+    var dx2 = (x1 - x2) * (x1 - x2);
+    var dy2 = (y1 - y2) * (y1 - y2);
+    return dx2 + dy2 < r * r;
 };
+
+// Get Euclidean distance between two points (x1, y1) and (x2, y2)
+function edist(x1, y1, x2, y2) {
+    return Math.sqrt((Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2)));
+};
+
+// Get closest line between a ball at (x1, y1) and a wall or target described by (left, top), (right, bottom)
+function cleverdist(x1, y1, left, top, right, bottom) {
+    var closestdist;
+    if (x1 >= left && x1 <= right) {
+        // If ball is directly below target, get distance to bottom
+        if (y1 >= bottom) closestdist = y1 - bottom;
+        else closestdist = top - y1;
+    } else if (y1 <= bottom && y1 >= top) {
+        if (x1 >= right) closestdist = x1 - right;
+        else closestdist = left - x1;
+    } else {
+        closestdist = Math.min(edist(x1, y1, left, top),
+                                edist(x1, y1, right, top),
+                                edist(x1, y1, left, bottom),
+                                edist(x1, y1, right, bottom))
+    }
+    return closestdist;
+}
 
 // Utility function to adjust for data without alpha channel
 function makeColor(col) {
     if (col.length === 3) {
-        return "rgba("+col[0]+","+col[1]+","+col[2]+",255)";
+        return "rgba(" + col[0] + "," + col[1] + "," + col[2] + ",255)";
     } else {
-        return "rgba("+col[0]+","+col[1]+","+col[2]+","+col[3]+")";
+        return "rgba(" + col[0] + "," + col[1] + "," + col[2] + "," + col[3] + ")";
     }
 };
