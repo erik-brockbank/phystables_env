@@ -105,7 +105,7 @@ Instructions.prototype.runInstructions = function(playbookIndex, exp) {
  */
 Experiment = function(instructions, triallist, trialpath, table, leftctr, rightctr, score, trcounter, istest, isshort) {
     this.istest = istest; // `test` experiments simulate a real experiment but write results as TEST_{exptid}.json
-    this.isshort = isshort; // `short` experiments run only instructions and two trials and do not write results to the server
+    this.isshort = isshort; // `short` experiments run only instructions and write results as TEST_{exptid}.json
 
     this.instructions = instructions;
     exptindex = new Date().getTime(); // unique user identifier based on unix timestamp
