@@ -121,7 +121,8 @@ Experiment = function(instructions, triallist, trialpath, table, leftctr, rightc
     this.trial.displaytext("Please wait for all of the data to load.");
     // Load in the list of trials to use & shuffle them
     var trialJson = readJson(triallist);
-    this.trlist = shuffle(trialJson.data); // NB: comment this out during testing
+    this.trlist = shuffle(trialJson.data); // NB: comment this out during debugging
+    // this.trlist = trialJson.data; // NB: uncomment this during debugging
     this.tridx = 0;
     this.loaded = new TrialList(this.trlist, trialpath);
     this.badtrial = false; // Holder for if window is too small or minimized
