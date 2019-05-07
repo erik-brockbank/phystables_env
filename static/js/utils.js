@@ -68,13 +68,19 @@ function edist(x1, y1, x2, y2) {
 // Get closest line between a ball at (x1, y1) and a wall or target described by (left, top), (right, bottom)
 function cleverdist(x1, y1, left, top, right, bottom) {
     var closestdist;
+    // 1. If ball x coord is between right and left borders, get distance to top or bottom of target
     if (x1 >= left && x1 <= right) {
         // If ball is directly below target, get distance to bottom
         if (y1 >= bottom) closestdist = y1 - bottom;
+        // Else get distance to top
         else closestdist = top - y1;
+    // 2. If ball y coord is between top and bottom borders, get distance to left or right of target
     } else if (y1 <= bottom && y1 >= top) {
+        // If ball is directly to the right of target, get distance to right
         if (x1 >= right) closestdist = x1 - right;
+        // Else get distance to left
         else closestdist = left - x1;
+    // 3. If ball is neither above, below, or to the left or right of target, get shortest distance to a corner
     } else {
         closestdist = Math.min(edist(x1, y1, left, top),
                                 edist(x1, y1, right, top),
