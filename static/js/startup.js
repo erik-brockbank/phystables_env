@@ -1,5 +1,7 @@
 /*
  * Startup library for URL processing, loading in html content, and initializing Experiment class
+ * To run, cd to home phystables_env directory, python -m http.server {port}
+ * Navigate to http://localhost:{port}/exp.html (see below for URL parsing)
  */
 
 $(window).ready(function() {
